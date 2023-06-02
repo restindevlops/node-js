@@ -10,6 +10,7 @@ const requestHandler =(req,res)=>{
             if(err){
                 console.log(err);
             }
+           
         res.write('<html>');
         res.write('<head><title>Enter Message</title></head>');
         res.write(`<body>${data}</body>`);
@@ -29,7 +30,7 @@ const requestHandler =(req,res)=>{
         });
         req.on('end',()=>{
             const parsedBody=Buffer.concat(body).toString();
-            const message= parsedBody.split('=')[1];
+            const message= parsedBody.split('=')[0];
            fs.writeFile('message.txt',message,(err)=>{
             if(err){
                 console.log(err)
@@ -46,7 +47,6 @@ const requestHandler =(req,res)=>{
 }
     
 module.exports=requestHandler;
-
 //     res.setHeader('Content-Type','text/html');
 //     res.write('<html>');
 //     res.write('<head><title>My first Page</title></head>');
